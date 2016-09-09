@@ -12,7 +12,7 @@ debug_switch = (os.environ.get('DEBUG') == '1')
 tz = timezone('Asia/Taipei')
 
 # Configure database
-mongo_plugin = MongoPlugin(uri=os.environ.get('MONGODB_URI'), db='test', keyword='mongo', tz_aware=True)
+mongo_plugin = MongoPlugin(uri=os.environ.get('MONGODB_URI'), db='', keyword='mongo', tz_aware=True)
 app.install(mongo_plugin)
 
 @app.route('/', template='index')
@@ -54,10 +54,11 @@ def fetch_and_cache(mongo):
 def fetch_api():
     try:
         response_text = weather.fetch()
+        response_content = weather.fetch_rain()
     except IOError:
         return {'error': 'server_unavailable'}
     try:
-        weather_dict = weather.parse(response_text)
+        weather_dict = weather.parse(response_text, response_content)
         weather_dict['date'] = tz.localize(datetime.strptime(weather_dict['date'], '%Y/%m/%d %H:%M:%S'))
         return weather_dict
     except Exception:

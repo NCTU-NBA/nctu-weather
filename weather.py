@@ -3,15 +3,22 @@ import html
 import json
 import requests
 import re
+import os
 from colorama import Fore, Style
 from datetime import datetime
 from sys import stderr
+from xml.etree import ElementTree
+
 
 def fetch():
-    #TODO
-    url = 'http://140.112.66.208:8080/mopl/rt2.one?one=execute'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q=Hsinchui&units=metric&APPID=' + os.environ.get('OPENWEATHER_API_KEY')
     request = requests.get(url)
     return request.text
+
+def fetch_rain():
+    url = 'http://opendata.cwb.gov.tw/opendataapi?dataid=O-A0002-001&authorizationkey=' + os.environ.get('CWB_API_KEY')
+    request = requests.get(url)
+    return request.content
 
 def search_one(pattern, string):
     match = re.search(pattern, string)
@@ -26,8 +33,14 @@ def print_err(text, color=Style.RESET_ALL, bright=False):
     stderr.write(text)
     stderr.write('\n')
 
-def parse(text):
-    date = search_one(r'觀測時間：\s*(\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2})', text)
+def parse(text, rain_content):
+    data = json.loads(text)
+    xml_tree = ElementTree.fromstring(rain_content)
+    ns = { 'cwb' : 'urn:cwb:gov:tw:cwbcommon:0.1' }
+    location = xml_tree.find("./cwb:location/[cwb:stationId='C0D660']", namespaces=ns)
+    rain = location.find("./cwb:weatherElement/[cwb:elementName='RAIN']/*/*", namespaces=ns).text
+    now = location.find("./cwb:weatherElement/[cwb:elementName='NOW']/*/*", namespaces=ns).text
+    date = datetime.fromtimestamp(data['dt']).strftime("%Y/%m/%d %H:%M:%S")
     if not date:
         print_err('ERR: Cannot find observing time. Check service availability.', Fore.RED, bright=True)
         print_err('Original string:')
@@ -37,16 +50,16 @@ def parse(text):
 
     return {
         'date': date,
-        'temperature': search_one(r'溫度：\s*([\d\.]+)&nbsp;', text),      # (˚C)
-        'pressure': search_one(r'氣壓：\s*([\d\.]+)&nbsp;', text),         # (hPa)
-        'humidity': search_one(r'相對濕度：\s*([\d\.]+)&nbsp;', text),      # (%)
-        'wind_speed': search_one(r'風速：\s*([\d\.]+)&nbsp;', text),       # (m/s)
-        'wind_direction': search_one(r'風向：\s*([\d\.]+)&nbsp;', text),   # (˚)
-        'rain': search_one(r'降雨強度：\s*([\d\.]+)&nbsp;', text),          # (mm/h)
+        'temperature': data['main']['temp'],      # (˚C)
+        'pressure': data['main']['pressure'],         # (hPa)
+        'humidity': data['main']['humidity'],      # (%)
+        'wind_speed': data['wind']['speed'],       # (m/s)
+        'wind_direction': data['wind']['deg'],   # (˚)
+        'rain': 0 if (rain == '-998.00') else float(rain),          # (mm/h)
 
-        'temp_max': search_one(r'本日最高溫：\s*([\d\.]+)℃', text),         # (˚C)
-        'temp_min': search_one(r'本日最低溫：\s*([\d\.]+)℃', text),         # (˚C)
-        'rain_day': search_one(r'本日降雨量：\s*([\d\.]+)mm', text),        # (mm)
+        'temp_max': data['main']['temp_max'],         # (˚C)
+        'temp_min': data['main']['temp_min'],         # (˚C)
+        'rain_day': float(now),        # (mm)
 
         'provider': '中央氣象局',
     }
@@ -54,5 +67,6 @@ def parse(text):
 if __name__ == '__main__':
     from sys import stdout, exit
     text = fetch()
-    data = parse(text)
+    rain_content = fetch_rain()
+    data = parse(text, rain_content)
     json.dump(data, stdout, ensure_ascii=False, indent=2)
