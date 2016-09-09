@@ -61,7 +61,7 @@ def parse(text, rain_content):
         'temp_min': data['main']['temp_min'],         # (˚C)
         'rain_day': float(now),        # (mm)
 
-        'provider': '中央氣象局',
+        'provider': '中央氣象局, OpenWeatherMap under CC BY-SA 4.0',
     }
 
 if __name__ == '__main__':
