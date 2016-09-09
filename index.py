@@ -12,7 +12,7 @@ debug_switch = (os.environ.get('DEBUG') == '1')
 tz = timezone('Asia/Taipei')
 
 # Configure database
-mongo_plugin = MongoPlugin(uri=os.environ.get('MONGODB_URI'), db='', keyword='mongo', tz_aware=True)
+mongo_plugin = MongoPlugin(uri=os.environ.get('MONGODB_URI'), db='test', keyword='mongo', tz_aware=True)
 app.install(mongo_plugin)
 
 @app.route('/', template='index')
