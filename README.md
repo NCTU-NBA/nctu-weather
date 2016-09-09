@@ -1,9 +1,10 @@
-阿屜報氣象
+阿屜報氣象-交大
 ==========
 
-臺大學生會氣象 API，由[第 28 屆臺大學生會福利部](https://www.facebook.com/NTUWelfare)設計、[臺灣大學大氣系](http://www.as.ntu.edu.tw)資料提供。
+交大氣象 API，原由[第 28 屆臺大學生會福利部](https://www.facebook.com/NTUWelfare)設計，[交通大學網路福利社](https://www.facebook.com/NCTUNBA)接續開發，[中央氣象局](http://www.cwb.gov.tw)與 [
+OpenWeatherMap Inc.](http://www.openweathermap.org) ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)) 資料提供。
 
-可以在[這裡](http://weather.ntustudents.org)看到實況，也可以在[這裡](http://weather.ntustudents.org/api)使用 API。
+可以在[這裡](http://weather.nctu.me)看到實況，也可以在[這裡](http://weather.nctu.me/api)使用 API。
 
 授權
 ----
