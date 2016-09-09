@@ -8,6 +8,7 @@ from datetime import datetime
 from sys import stderr
 
 def fetch():
+    #TODO
     url = 'http://140.112.66.208:8080/mopl/rt2.one?one=execute'
     request = requests.get(url)
     return request.text
@@ -47,7 +48,7 @@ def parse(text):
         'temp_min': search_one(r'本日最低溫：\s*([\d\.]+)℃', text),         # (˚C)
         'rain_day': search_one(r'本日降雨量：\s*([\d\.]+)mm', text),        # (mm)
 
-        'provider': '國立臺灣大學中尺度暨地形降水研究室',
+        'provider': '中央氣象局',
     }
 
 if __name__ == '__main__':
