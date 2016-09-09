@@ -10,10 +10,10 @@
     <script src="https://rschiang.github.io/ntu-weather/assets/chartist.min.js"></script>
     <script src="https://rschiang.github.io/ntu-weather/assets/chartist-plugin-pointlabels.min.js"></script>
 
-    <title>天氣 – 國立臺灣大學, 台灣</title>
-    <meta name="description" content="究竟公館現在有沒有在下雨呢？臺大即時氣象資訊（氣溫、風向、氣壓、降雨），讓第 28 屆臺大學生會福利部告訴你！" />
-    <meta property="og:site_name" content="臺大學生會" />
-    <meta property="og:title" content="國立臺灣大學, 台灣 — NTUSA 氣象" />
+    <title>天氣 – 國立交通大學, 臺灣</title>
+    <meta name="description" content="今天要回學校，究竟交大現在有沒有在下雨呢？讓網路福利社告訴你！" />
+    <meta property="og:site_name" content="網路福利社" />
+    <meta property="og:title" content="國立交通大學, 臺灣 — 網路福利社 氣象" />
     <meta property="og:image" content="https://rschiang.github.io/ntu-weather/assets/social.jpg" />
     <meta property="og:url" content="http://weather.ntustudents.org" />
 
@@ -48,7 +48,7 @@
 </head>
 <body>
     <header class="section">
-        <img alt="國立臺灣大學學生會" class="vendor logo" src="http://rschiang.github.io/ntu-weather/assets/logo.png" />
+        <img alt="網路福利社" class="vendor logo" src="https://raw.githubusercontent.com/NCTU-NBA/nctu-weather/gh-pages/assets/logo.png" />
     </header>
 <%
     if not defined('error'):
@@ -69,7 +69,7 @@
 %>
     <section class="weather {{ weather_type }}">
         <div class="section">
-            <h3>國立臺灣大學, 台灣</h3>
+            <h3>國立交通大學, 臺灣</h3>
 % if defined('error'):
             <div class="temperature">
                 <span class="current">--</span>
@@ -107,13 +107,13 @@
     </section>
     <footer class="section">
         <div class="social">
-            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FNTUWelfare&width=92&layout=button_count&action=like&show_faces=false&share=false&height=21&appId=599411893573946" width="92" height="21" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-            <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fweather.ntustudents.org%2F&layout=button&mobile_iframe=true&appId=599411893573946&width=58&height=21" width="58" height="21" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FNCTUNBA%2F&width=77&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" width="77" height="21" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fweather.nctu.me&layout=button&size=small&mobile_iframe=true&width=62&height=20&appId" width="62" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
         </div>
         <div class="meta">
-            第 28 屆<a href="https://www.facebook.com/NTUWelfare" rel="external nofollow">國立臺灣大學學生會福利部</a>
+            <a href="https://www.facebook.com/NCTUNBA" rel="external nofollow">交通大學網路福利社</a>
             <span class="hide">「總是為你撐起一把傘。」</span><br />
-            National Taiwan University Student Association, 2016
+            National Chiao Tung University Network Benefit Association, 2016
         </div>
     </footer>
 % if not defined('error'):
