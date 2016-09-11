@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="網路福利社" />
     <meta property="og:title" content="國立交通大學, 臺灣 — 網路福利社 氣象" />
     <meta property="og:image" content="https://rschiang.github.io/ntu-weather/assets/social.jpg" />
-    <meta property="og:url" content="http://weather.ntustudents.org" />
+    <meta property="og:url" content="http://weather.nctu.me" />
 
 <%
     def value(text, default='N/A'):
