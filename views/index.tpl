@@ -103,8 +103,8 @@
     </section>
     <footer class="section">
         <div class="social">
-            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FNCTUNBA%2F&width=77&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" width="77" height="21" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-            <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fweather.nctu.me&layout=button&size=small&mobile_iframe=true&width=62&height=20&appId" width="62" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FNCTUNBA%2F&width=77&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" style="border:none;overflow:hidden" scrolling="no" allowtransparency="true" frameborder="0" height="21" width="89"></iframe>
+            <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fweather.nctu.me&layout=button&size=small&mobile_iframe=true&width=62&height=20&appId" style="border:none;overflow:hidden" scrolling="no" allowtransparency="true" frameborder="0" height="21" width="64"></iframe>
         </div>
         <div class="meta">
             <a href="https://www.facebook.com/NCTUNBA" rel="external nofollow">交通大學網路福利社</a>
