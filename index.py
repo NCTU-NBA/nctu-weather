@@ -12,12 +12,12 @@ debug_switch = (os.environ.get('DEBUG') == '1')
 tz = timezone('Asia/Taipei')
 
 # Configure database
-mongo_plugin = MongoPlugin(uri=os.environ.get('MONGODB_URI'), db='', keyword='mongo', tz_aware=True)
+mongo_plugin = MongoPlugin(uri=os.environ.get('MONGODB_URI'), db='test', keyword='mongo', tz_aware=True)
 app.install(mongo_plugin)
 
 @app.route('/', template='index')
 def index(mongo):
-    last_doc = get_cached(mongo, timeout=900)
+    last_doc = get_cached(mongo)
     if not last_doc:
         last_doc = fetch_and_cache(mongo)
     last_doc['daily'] = aggregate_daily(mongo, datetime.now(tz))
@@ -25,13 +25,13 @@ def index(mongo):
 
 @app.route('/api')
 def api(mongo):
-    last_doc = get_cached(mongo, timeout=300)
+    last_doc = get_cached(mongo)
     if not last_doc:
         last_doc = fetch_and_cache(mongo)
     last_doc['date'] = last_doc['date'].isoformat()
     return last_doc
 
-def get_cached(mongo, timeout=600):
+def get_cached(mongo, timeout=900):
     last_doc = get_one(mongo)
 
     if last_doc:
@@ -81,4 +81,4 @@ def aggregate_daily(mongo, date):
     return reversed(doc_list)
 
 if __name__ == '__main__':
-    app.run(debug=debug_switch, reloader=debug_switch)
+    app.run(debug=debug_switch, reloader=debug_switch, host='0.0.0.0', port='80')
