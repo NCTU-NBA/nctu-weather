@@ -31,7 +31,7 @@ def api(mongo):
     last_doc['date'] = last_doc['date'].isoformat()
     return last_doc
 
-def get_cached(mongo, timeout=900):
+def get_cached(mongo, timeout=1200):
     last_doc = get_one(mongo)
 
     if last_doc:
