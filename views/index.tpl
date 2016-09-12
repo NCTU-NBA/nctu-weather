@@ -14,7 +14,7 @@
     <meta name="description" content="今天要回學校，究竟交大現在有沒有在下雨呢？讓網路福利社告訴你！" />
     <meta property="og:site_name" content="網路福利社" />
     <meta property="og:title" content="國立交通大學, 臺灣 — 網路福利社 氣象" />
-    <meta property="og:image" content="../assets/social.png" />
+    <meta property="og:image" content="http://weather.nctu.me/assets/social.png" />
     <meta property="og:url" content="http://weather.nctu.me" />
 
 <%

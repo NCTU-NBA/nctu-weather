@@ -87,4 +87,4 @@ def aggregate_daily(mongo, date):
     return reversed(doc_list)
 
 if __name__ == '__main__':
-    app.run(debug=debug_switch, reloader=debug_switch, host='0.0.0.0', port='8080')
+    app.run(debug=debug_switch, reloader=debug_switch, host='0.0.0.0', port='80')
