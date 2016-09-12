@@ -4,17 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="http://overpass-30e2.kxcdn.com/overpass.css" />
-    <link rel="stylesheet" href="https://rschiang.github.io/ntu-weather/assets/normalize.min.css" />
-    <link rel="stylesheet" href="https://rschiang.github.io/ntu-weather/assets/chartist.min.css" />
-    <link rel="stylesheet" href="https://rschiang.github.io/ntu-weather/assets/weather.css" />
-    <script src="https://rschiang.github.io/ntu-weather/assets/chartist.min.js"></script>
-    <script src="https://rschiang.github.io/ntu-weather/assets/chartist-plugin-pointlabels.min.js"></script>
+    <link rel="stylesheet" href="http://blog.nba.nctu.edu.tw/nctu-weather/assets/normalize.min.css" />
+    <link rel="stylesheet" href="http://blog.nba.nctu.edu.tw/nctu-weather/assets/chartist.min.css" />
+    <link rel="stylesheet" href="http://blog.nba.nctu.edu.tw/nctu-weather/assets/weather.css" />
+    <script src="http://blog.nba.nctu.edu.tw/nctu-weather/assets/chartist.min.js"></script>
+    <script src="http://blog.nba.nctu.edu.tw/nctu-weather/assets/chartist-plugin-pointlabels.min.js"></script>
 
     <title>天氣 – 國立交通大學, 臺灣</title>
     <meta name="description" content="今天要回學校，究竟交大現在有沒有在下雨呢？讓網路福利社告訴你！" />
     <meta property="og:site_name" content="網路福利社" />
     <meta property="og:title" content="國立交通大學, 臺灣 — 網路福利社 氣象" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/NCTU-NBA/nctu-weather/gh-pages/assets/social.png" />
+    <meta property="og:image" content="http://blog.nba.nctu.edu.tw/nctu-weather/assets/social.png" />
     <meta property="og:url" content="http://weather.nctu.me" />
 
 <%
@@ -44,7 +44,7 @@
 <body>
     <a href="https://github.com/NCTU-NBA/nctu-weather"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header class="section">
-        <img alt="網路福利社" class="vendor logo" src="https://raw.githubusercontent.com/NCTU-NBA/nctu-weather/gh-pages/assets/logo.png" />
+        <img alt="網路福利社" class="vendor logo" src="http://blog.nba.nctu.edu.tw/nctu-weather/assets/logo.png" />
     </header>
 <%
     if not defined('error'):
