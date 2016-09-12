@@ -29,16 +29,17 @@ def api(mongo):
     if not last_doc:
         last_doc = fetch_and_cache(mongo)
     last_doc['date'] = last_doc['date'].isoformat()
+    last_doc['query_date'] = last_doc['query_date'].isoformat()
     return last_doc
 
-def get_cached(mongo, timeout=1200):
+def get_cached(mongo, timeout=900):
     last_doc = get_one(mongo)
 
     if last_doc:
         now_date = datetime.now(tz)
-        last_date = last_doc['date'].astimezone(tz)
-        if (now_date - last_date).total_seconds() < timeout:
-            last_doc['date'] = last_date
+        last_query_date = last_doc['query_date'].astimezone(tz)
+        if (now_date - last_query_date).total_seconds() < timeout:
+            last_doc['date'] = last_doc['date'].astimezone(tz) 
             return last_doc
 
     return None
@@ -60,6 +61,7 @@ def fetch_api():
     try:
         weather_dict = weather.parse(response_text, response_content)
         weather_dict['date'] = tz.localize(datetime.strptime(weather_dict['date'], '%Y/%m/%d %H:%M:%S'))
+        weather_dict['query_date'] = tz.localize(datetime.strptime(weather_dict['query_date'], '%Y/%m/%d %H:%M:%S'))
         return weather_dict
     except Exception:
         return {'error': 'data_unavailable'}

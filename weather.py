@@ -49,6 +49,7 @@ def parse(text, rain_content):
         raise Exception('Parse failed')
 
     return {
+        'query_date': datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
         'date': date,
         'temperature': data['main']['temp'],      # (˚C)
         'pressure': data['main']['pressure'],         # (hPa)
