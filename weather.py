@@ -16,9 +16,9 @@ def fetch():
     return request.text
 
 def fetch_rain():
-    url = 'http://opendata.cwb.gov.tw/opendataapi?dataid=O-A0002-001&authorizationkey=' + os.environ.get('CWB_API_KEY')
+    url = 'http://opendata.epa.gov.tw/ws/Data/RainTenMin/?$filter=SiteId%20eq%20%27C0D660%27&$select=SiteId,Rainfall1hr,Now,PublishTime&$orderby=PublishTime%20DESC&$skip=0&$top=1000&format=json'
     request = requests.get(url)
-    return request.content
+    return request.text
 
 def search_one(pattern, string):
     match = re.search(pattern, string)
@@ -33,13 +33,9 @@ def print_err(text, color=Style.RESET_ALL, bright=False):
     stderr.write(text)
     stderr.write('\n')
 
-def parse(text, rain_content):
+def parse(text, rain_text):
     data = json.loads(text)
-    xml_tree = ElementTree.fromstring(rain_content)
-    ns = { 'cwb' : 'urn:cwb:gov:tw:cwbcommon:0.1' }
-    location = xml_tree.find("./cwb:location/[cwb:stationId='C0D660']", namespaces=ns)
-    rain = location.find("./cwb:weatherElement/[cwb:elementName='RAIN']/*/*", namespaces=ns).text
-    now = location.find("./cwb:weatherElement/[cwb:elementName='NOW']/*/*", namespaces=ns).text
+    rain_data = json.loads(rain_text)[0]
     date = datetime.fromtimestamp(data['dt']).strftime("%Y/%m/%d %H:%M:%S")
     if not date:
         print_err('ERR: Cannot find observing time. Check service availability.', Fore.RED, bright=True)
@@ -56,18 +52,18 @@ def parse(text, rain_content):
         'humidity': data['main']['humidity'],      # (%)
         'wind_speed': data['wind']['speed'],       # (m/s)
         'wind_direction': data['wind']['deg'],   # (˚)
-        'rain': 0 if (rain == '-998.00') else float(rain),          # (mm/h)
+        'rain': float(rain_data['Rainfall1hr']),          # (mm/h)
 
         'temp_max': data['main']['temp_max'],         # (˚C)
         'temp_min': data['main']['temp_min'],         # (˚C)
-        'rain_day': float(now),        # (mm)
+        'rain_day': float(rain_data['Now']),        # (mm)
 
-        'provider': '中央氣象局, OpenWeatherMap',
+        'provider': '中央氣象局/十分鐘雨量資料, OpenWeatherMap',
     }
 
 if __name__ == '__main__':
     from sys import stdout, exit
     text = fetch()
-    rain_content = fetch_rain()
-    data = parse(text, rain_content)
+    rain_text = fetch_rain()
+    data = parse(text, rain_text)
     json.dump(data, stdout, ensure_ascii=False, indent=2)
