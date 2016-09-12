@@ -44,7 +44,7 @@
 <body>
     <a href="https://github.com/NCTU-NBA/nctu-weather"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header class="section">
-        <img alt="網路福利社" class="vendor logo" src="http://blog.nba.nctu.edu.tw/nctu-weather/assets/" />
+        <img alt="網路福利社" class="vendor logo" src="http://blog.nba.nctu.edu.tw/nctu-weather/assets/logo.png" />
     </header>
 <%
     if not defined('error'):
