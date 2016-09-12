@@ -2,7 +2,7 @@
 import os
 import pymongo
 import weather
-from bottle import Bottle, view
+from bottle import Bottle, view, static_file
 from bottle_mongo import MongoPlugin
 from datetime import datetime, timedelta
 from pytz import timezone
@@ -31,6 +31,10 @@ def api(mongo):
     last_doc['date'] = last_doc['date'].isoformat()
     last_doc['query_date'] = last_doc['query_date'].isoformat()
     return last_doc
+
+@app.route('/assets/<filename>')
+def server_static(filename):
+        return static_file(filename, root='./assets/')
 
 def get_cached(mongo, timeout=900):
     last_doc = get_one(mongo)
@@ -83,4 +87,4 @@ def aggregate_daily(mongo, date):
     return reversed(doc_list)
 
 if __name__ == '__main__':
-    app.run(debug=debug_switch, reloader=debug_switch, host='0.0.0.0', port='80')
+    app.run(debug=debug_switch, reloader=debug_switch, host='0.0.0.0', port='8080')
